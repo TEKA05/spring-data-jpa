@@ -1,8 +1,11 @@
 package com.teka.services.impl;
 
+import com.teka.dto.DtoStudent;
+import com.teka.dto.DtoStudentIU;
 import com.teka.entites.Student;
 import com.teka.repository.StudentRepository;
 import com.teka.services.IStudentService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +19,19 @@ public class StudentServiceImpl implements IStudentService
     private StudentRepository studentRepository;
 
     @Override
-    public Student saveStudent(Student student)
+    public DtoStudent saveStudent(DtoStudentIU dtoStudentIU)
     {
-        return studentRepository.save(student);
+        DtoStudent responce = new DtoStudent();
+        Student student = new Student();
+        BeanUtils.copyProperties(dtoStudentIU,student);
+
+        Student dbStudent= studentRepository.save(student);
+        BeanUtils.copyProperties(dbStudent , responce);
+        return  responce;
 
     }
+
+
 
     @Override
     public List<Student> getAllStudents()
