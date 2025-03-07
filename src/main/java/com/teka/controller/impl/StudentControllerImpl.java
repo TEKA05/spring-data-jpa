@@ -1,6 +1,8 @@
 package com.teka.controller.impl;
 
 import com.teka.controller.IStudentController;
+import com.teka.dto.DtoStudent;
+import com.teka.dto.DtoStudentIU;
 import com.teka.entites.Student;
 import com.teka.services.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +19,20 @@ public class StudentControllerImpl implements IStudentController
     //DTO Kullanılır
     @PostMapping(path = "/save")
     @Override
-    public Student saveStudent(@RequestBody Student student)
+    public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU)
      {
 
-         return studentService.saveStudent(student);
+         return studentService.saveStudent(dtoStudentIU);
      }
      @GetMapping(path = "/list")
     @Override
-    public List<Student> getAllStudents() {
+    public List<DtoStudent> getAllStudents() {
         return studentService.getAllStudents();
     }
 
     @GetMapping(path = "/list/{id}")
     @Override
-    public Student getStudentById(@PathVariable(name = "id") Integer id) {
+    public DtoStudent getStudentById(@PathVariable(name = "id") Integer id) {
         return studentService.getStudentById(id);
     }
 
@@ -43,9 +45,9 @@ public class StudentControllerImpl implements IStudentController
 
     @PutMapping(path = "/update/{id}")
     @Override
-    public Student updateStudent(@PathVariable(name = "id") Integer id, @RequestBody Student updateStudent)
+    public DtoStudent updateStudent(@PathVariable(name = "id") Integer id, @RequestBody DtoStudentIU dtoStudentIU)
     {
-        return studentService.upDateStudent(id, updateStudent);
+        return studentService.upDateStudent(id, dtoStudentIU);
     }
 
 

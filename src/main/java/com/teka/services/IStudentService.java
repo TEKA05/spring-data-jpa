@@ -10,13 +10,13 @@ import java.util.List;
 public interface IStudentService {
     public DtoStudent saveStudent(DtoStudentIU student);
 
-    public List<Student> getAllStudents();
+    public List<DtoStudent> getAllStudents();
 
-    public  Student getStudentById(Integer id);
+    public  DtoStudent getStudentById(Integer id);
 
     public void deleteStudent (Integer id);
 
-    public Student upDateStudent (Integer id , Student updateStudent);
+    public DtoStudent upDateStudent (Integer id , DtoStudentIU dtoStudentIU);
 
 
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,46 +33,65 @@ public class StudentServiceImpl implements IStudentService
     }
 
 
-
     @Override
-    public List<Student> getAllStudents()
+    public List<DtoStudent> getAllStudents()
     {
+        List<DtoStudent> dtoList =new ArrayList<>();
         List<Student> studentList= studentRepository.findAll();
-        return studentList;
+        for (Student student: studentList)
+        {
+            DtoStudent dto = new DtoStudent();
+            BeanUtils.copyProperties(student,dto);
+            dtoList.add(dto);
+
+        }
+
+        return dtoList;
     }
 
     @Override
-    public Student getStudentById(Integer id)
+    public DtoStudent getStudentById(Integer id)
     {
+        DtoStudent dto  = new DtoStudent();
         Optional <Student> optional =studentRepository.findById(id);
         //ispresenet aslında değer varsa demek , veriyi bulduysan
         if (optional.isPresent())
         {
-           return optional.get();
+           Student dbStudent = optional.get();
+
+           BeanUtils.copyProperties(dbStudent,dto);
         }
-        return null;
+        return dto;
     }
 
     @Override
     public void deleteStudent(Integer id)
     {
-     Student dbStudent = getStudentById(id);
-     if(dbStudent!=null) {
-         studentRepository.delete(dbStudent);
-     }
+     Optional <Student> optional = studentRepository.findById(id);
+        if (optional.isPresent()) {
+            studentRepository.delete(optional.get());
+
+        }
      }
 
     @Override
-    public Student upDateStudent(Integer id, Student updateStudent)
+    public DtoStudent upDateStudent(Integer id , DtoStudentIU dtoStudentIU)
     {
-        Student dbStudent = getStudentById(id);
-        if (dbStudent!=null)
-        {
-            dbStudent.setFirst_name(updateStudent.getFirst_name());
-            dbStudent.setLast_name(updateStudent.getLast_name());
-            dbStudent.setBirth_of_date(updateStudent.getBirth_of_date());
 
-            studentRepository.save(dbStudent);
+        DtoStudent dto = new DtoStudent();
+       Optional<Student> optional = studentRepository.findById(id);
+        if (optional.isPresent())
+        {
+            Student dbStudent =optional.get();
+
+            dbStudent.setFirst_name(dtoStudentIU.getFirst_name());
+            dbStudent.setLast_name(dtoStudentIU.getLast_name());
+            dbStudent.setBirth_of_date(dtoStudentIU.getBirth_of_date());
+
+            Student updatedStudent =studentRepository.save(dbStudent);
+
+            BeanUtils.copyProperties(updatedStudent,dto);
+            return  dto;
 
         }
         return null;
