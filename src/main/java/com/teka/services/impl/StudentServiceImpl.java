@@ -37,7 +37,7 @@ public class StudentServiceImpl implements IStudentService
     public List<DtoStudent> getAllStudents()
     {
         List<DtoStudent> dtoList =new ArrayList<>();
-        List<Student> studentList= studentRepository.findAll();
+        List<Student> studentList= studentRepository.findAllStudents();
         for (Student student: studentList)
         {
             DtoStudent dto = new DtoStudent();
@@ -53,7 +53,7 @@ public class StudentServiceImpl implements IStudentService
     public DtoStudent getStudentById(Integer id)
     {
         DtoStudent dto  = new DtoStudent();
-        Optional <Student> optional =studentRepository.findById(id);
+        Optional <Student> optional =studentRepository.findStudentById(id);
         //ispresenet aslında değer varsa demek , veriyi bulduysan
         if (optional.isPresent())
         {
