@@ -20,6 +20,6 @@ public interface StudentRepository extends JpaRepository <Student,Integer>
     @Query(value = "select * from student.student" , nativeQuery = true)
     List<Student> findAllStudents();
 
-    @Query(value = "from Student s where s.id= :studentId")
+    @Query(value = "from Student s where s.id= :studentId")//deneme
     Optional<Student> findStudentById(Integer studentId);
 }
