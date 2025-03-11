@@ -3,8 +3,8 @@ package com.teka.controller.impl;
 import com.teka.controller.IStudentController;
 import com.teka.dto.DtoStudent;
 import com.teka.dto.DtoStudentIU;
-import com.teka.entites.Student;
 import com.teka.services.IStudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ public class StudentControllerImpl implements IStudentController
     //DTO Kullanılır
     @PostMapping(path = "/save")
     @Override
-    public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU)
+    public DtoStudent saveStudent(@RequestBody @Valid DtoStudentIU dtoStudentIU)
      {
 
          return studentService.saveStudent(dtoStudentIU);

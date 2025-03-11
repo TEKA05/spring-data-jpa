@@ -1,6 +1,8 @@
 package com.teka.dto;
 
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class DtoStudentIU
 {
+
+    @NotEmpty(message = "FirstName alanı boş bırakılamaz!")
     private String first_name;
 
     private String  last_name;
