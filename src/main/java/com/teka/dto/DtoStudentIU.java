@@ -21,16 +21,16 @@ public class DtoStudentIU
     @Max(value = 10, message = "first name max 10 karakter olmalıdır")
     private String first_name;
 
-  //  @Size(min = 3, max = 30)
+    @Size(min = 3, max = 30)
     private String  last_name;
 
     private Date birth_of_date;
 
- //   @Email(message = "Email formatında bir adres giriniz!")
+   @Email(message = "Email formatında bir adres giriniz!")
     private String email;
 
- //   @Size(min = 11 , max =11, message = "T.C. numarası 11 haneli olmalıdır")
-  //  @NotEmpty(message = "T.C. numarası boş geçilemez")
+    @Size(min = 11 , max =11, message = "T.C. numarası 11 haneli olmalıdır")
+    @NotEmpty(message = "T.C. numarası boş geçilemez")
     private String tckn;
 
     public String getFirst_name() {

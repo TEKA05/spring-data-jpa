@@ -43,9 +43,9 @@ public class GlobalExceptionHandler
 
     }
 
-    private ApiError createApiError(Map<String, List<String>> errors)
+    private <T>ApiError<T> createApiError(T errors)
     {
-        ApiError apiError = new ApiError();
+        ApiError<T> apiError = new ApiError<T>();
         apiError.setId(UUID.randomUUID().toString());
         apiError.setErrorTime(new Date());
         apiError.setErrors(errors);

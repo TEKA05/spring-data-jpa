@@ -5,19 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiError
+public class ApiError <T>
 {
     private String id;
 
     private Date errorTime;
 
-    private Map<String, List<String>> errors;
+    private T errors;
 
     public String getId() {
         return id;
@@ -35,11 +34,11 @@ public class ApiError
         this.errorTime = errorTime;
     }
 
-    public Map<String, List<String>> getErrors() {
+    public T getErrors() {
         return errors;
     }
 
-    public void setErrors(Map<String, List<String>> errors) {
+    public void setErrors(T errors) {
         this.errors = errors;
     }
 }
