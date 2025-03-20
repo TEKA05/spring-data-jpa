@@ -1,4 +1,9 @@
 package com.teka.controller;
 
-public interface ICustomerController {
+import com.teka.dto.DtoCustomer;
+
+public interface ICustomerController
+{
+    public DtoCustomer findCustomerById(Long id);
+
 }

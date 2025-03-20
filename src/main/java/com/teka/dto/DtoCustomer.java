@@ -1,27 +1,26 @@
-package com.teka.entites;
+package com.teka.dto;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "customer")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer
+public class DtoCustomer
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    @Column(name = "name")
+
     private String name;
 
-    @OneToOne
-    private Address address;
+    private DtoAddress address;
 
     public Long getId() {
         return id;
@@ -39,11 +38,11 @@ public class Customer
         this.name = name;
     }
 
-    public Address getAddress() {
+    public DtoAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(DtoAddress address) {
         this.address = address;
     }
 }
