@@ -15,6 +15,12 @@ public class DtoDepartment
 
     private String departmentName;
 
+
+    public DtoDepartment(Long id, String departmentName) {
+        this.id = id;
+        this.departmentName = departmentName;
+    }
+
     public Long getId() {
         return id;
     }

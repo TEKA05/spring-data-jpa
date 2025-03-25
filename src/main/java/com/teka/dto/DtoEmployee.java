@@ -4,6 +4,7 @@ package com.teka.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.yaml.snakeyaml.events.Event;
 
 @Data
 @AllArgsConstructor
@@ -33,5 +34,11 @@ public class DtoEmployee
         this.name = name;
     }
 
+    public DtoDepartment getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(DtoDepartment department) {
+        this.department = department;
+    }
 }
