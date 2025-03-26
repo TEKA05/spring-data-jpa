@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -31,6 +32,20 @@ public class Student
     @JsonFormat(pattern = "yyyy-MM-dd")// date format annostation veya @DateTimeFormat annostationuda kullanılabilir.
     @Column(name = "birth_of_date",nullable = true)
     private Date birth_of_date;
+
+    @ManyToMany
+    @JoinTable(name ="student_course",
+            joinColumns=@JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courses;
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 
     public Integer getId() {
         return id;

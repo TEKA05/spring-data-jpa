@@ -1,7 +1,9 @@
 package com.teka.services.impl;
 
+import com.teka.dto.DtoCourse;
 import com.teka.dto.DtoStudent;
 import com.teka.dto.DtoStudentIU;
+import com.teka.entites.Course;
 import com.teka.entites.Student;
 import com.teka.repository.StudentRepository;
 import com.teka.services.IStudentService;
@@ -49,7 +51,7 @@ public class StudentServiceImpl implements IStudentService
         return dtoList;
     }
 
-    @Override
+   /* @Override
     public DtoStudent getStudentById(Integer id)
     {
         DtoStudent dto  = new DtoStudent();
@@ -62,7 +64,31 @@ public class StudentServiceImpl implements IStudentService
            BeanUtils.copyProperties(dbStudent,dto);
         }
         return dto;
+    }*/
+
+    @Override
+    public DtoStudent getStudentById(Integer id)
+    {
+        DtoStudent dtoStudent = new DtoStudent();
+        Optional<Student> optional =studentRepository.findById(id);
+
+        if (optional.isEmpty()){
+            return null;
+        }
+            Student dbStudent =optional.get();
+        BeanUtils.copyProperties(dbStudent,dtoStudent);
+        if (dbStudent.getCourses()!=null && !dbStudent.getCourses().isEmpty()){
+            for (Course course : dbStudent.getCourses()){
+                DtoCourse dtoCourse = new DtoCourse();
+                BeanUtils.copyProperties(course,dtoCourse);
+
+                dtoStudent.getCourses().add(dtoCourse);
+            }
+        }
+
+        return dtoStudent ;
     }
+
 
     @Override
     public void deleteStudent(Integer id)
